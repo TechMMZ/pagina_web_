@@ -3,7 +3,7 @@ import QRCode from 'react-qr-code';
 
 const QRGenerator = () => {
     // const url = "https://github.com/";
-    const url = "https://pagina-web-weld.vercel.app/registro"; // o http://localhost:5173/registro si estás en desarrollo
+    const url = "https://pagina-web-weld.vercel.app/registro";
 
     return (
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
