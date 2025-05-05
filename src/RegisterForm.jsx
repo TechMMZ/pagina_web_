@@ -3,69 +3,84 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
-    const [formData, setFormData] = useState({ name: '', email: '' });
+    const [showConsent, setShowConsent] = useState(true);
+    const [showForm, setShowForm] = useState(false);
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    const handleAccept = () => {
+        setShowConsent(false);
+        setShowForm(true);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // Aquí puedes guardar los datos, enviar a una API, etc.
-        console.log('Formulario enviado:', formData);
-
-        // Redirige a la página principal después de enviar
-        navigate('/');
+    const handleDecline = () => {
+        navigate('/'); // Puedes cambiar esto por la ruta que quieras
     };
 
     return (
-        <div style={{
-            position: 'fixed',
-            top: 0, left: 0, right: 0, bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.6)',
-            display: 'flex', justifyContent: 'center', alignItems: 'center',
-            zIndex: 999
-        }}>
-            <div style={{
-                backgroundColor: 'white',
-                padding: '30px',
-                borderRadius: '10px',
-                width: '90%',
-                maxWidth: '400px',
-                boxShadow: '0 0 20px rgba(0,0,0,0.3)'
-            }}>
-                <h2 style={{ textAlign: 'center' }}>Regístrate</h2>
-                <form onSubmit={handleSubmit}>
-                    <div style={{ marginBottom: '15px' }}>
-                        <label>Nombre:<br />
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                                style={{ width: '100%' }}
-                            />
-                        </label>
+        <>
+            {/* Modal de consentimiento */}
+            {showConsent && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: 'rgba(0,0,0,0.6)',
+                    display: 'flex', justifyContent: 'center', alignItems: 'center',
+                    zIndex: 999
+                }}>
+                    <div style={{
+                        backgroundColor: 'white',
+                        padding: '30px',
+                        borderRadius: '10px',
+                        width: '90%',
+                        maxWidth: '400px',
+                        textAlign: 'center',
+                        boxShadow: '0 0 20px rgba(0,0,0,0.3)'
+                    }}>
+                        <h2>¿Deseas aceptar los beneficios?</h2>
+                        <p>Podrás acceder a contenidos y oportunidades exclusivas.</p>
+                        <div style={{ marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                            <button onClick={handleAccept}>Sí, aceptar</button>
+                            <button onClick={handleDecline}>No, gracias</button>
+                        </div>
                     </div>
-                    <div style={{ marginBottom: '15px' }}>
-                        <label>Email:<br />
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                style={{ width: '100%' }}
-                            />
-                        </label>
+                </div>
+            )}
+
+            {/* Modal con el formulario */}
+            {showForm && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: 'rgba(0,0,0,0.6)',
+                    display: 'flex', justifyContent: 'center', alignItems: 'center',
+                    zIndex: 999
+                }}>
+                    <div style={{
+                        backgroundColor: 'white',
+                        padding: '20px',
+                        borderRadius: '10px',
+                        width: '95%',
+                        maxWidth: '800px',
+                        maxHeight: '90vh',
+                        overflow: 'hidden',
+                        boxShadow: '0 0 20px rgba(0,0,0,0.3)'
+                    }}>
+                        <iframe
+                            src="https://docs.google.com/forms/d/e/1FAIpQLSeHtaKN7-218pPcd7ZuuqJTFGOEZZLDFhHDdqhDMMMFLHBGJg/viewform?embedded=true"
+                            width="100%"
+                            height="600px"
+                            frameBorder="0"
+                            marginHeight="0"
+                            marginWidth="0"
+                            title="Google Form"
+                            style={{ border: 'none' }}
+                        >
+                            Cargando…
+                        </iframe>
                     </div>
-                    <button type="submit" style={{ width: '100%' }}>Enviar</button>
-                </form>
-            </div>
-        </div>
+                </div>
+            )}
+        </>
     );
 };
 

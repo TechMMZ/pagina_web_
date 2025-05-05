@@ -6,10 +6,10 @@ import RegisterForm from './RegisterForm';
 const App = () => {
   return (
     <Router>
-      <nav style={{ textAlign: 'center', padding: '20px' }}>
+      {/* <nav style={{ textAlign: 'center', padding: '20px' }}>
         <Link to="/" style={{ marginRight: '20px' }}>Ver QR</Link>
         <Link to="/registro">Formulario</Link>
-      </nav>
+      </nav> */}
 
       <Routes>
         <Route path="/" element={<QRGenerator />} />
