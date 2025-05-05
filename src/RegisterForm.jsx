@@ -13,7 +13,12 @@ const RegisterForm = () => {
     };
 
     const handleDecline = () => {
-        navigate('/'); // Puedes cambiar esto por la ruta que quieras
+        navigate('/'); // Redirige si no acepta los beneficios
+    };
+
+    const handleCloseForm = () => {
+        setShowForm(false);
+        navigate('/'); // Redirige al cerrar el formulario
     };
 
     return (
@@ -63,8 +68,27 @@ const RegisterForm = () => {
                         maxWidth: '800px',
                         maxHeight: '90vh',
                         overflow: 'hidden',
+                        position: 'relative',
                         boxShadow: '0 0 20px rgba(0,0,0,0.3)'
                     }}>
+                        {/* Botón de cerrar */}
+                        <button
+                            onClick={handleCloseForm}
+                            style={{
+                                position: 'absolute',
+                                top: '10px',
+                                right: '10px',
+                                background: 'transparent',
+                                border: 'none',
+                                fontSize: '1.5rem',
+                                cursor: 'pointer'
+                            }}
+                            aria-label="Cerrar formulario"
+                        >
+                            ×
+                        </button>
+
+                        {/* Formulario de Google */}
                         <iframe
                             src="https://docs.google.com/forms/d/e/1FAIpQLSeHtaKN7-218pPcd7ZuuqJTFGOEZZLDFhHDdqhDMMMFLHBGJg/viewform?embedded=true"
                             width="100%"
