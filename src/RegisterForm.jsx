@@ -1,11 +1,20 @@
-// RegisterForm.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
-    const [showConsent, setShowConsent] = useState(true);
+    const [showConsent, setShowConsent] = useState(false);  // Cambiar a false inicialmente
     const [showForm, setShowForm] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Esperar 5 segundos antes de mostrar el consentimiento
+        const timer = setTimeout(() => {
+            setShowConsent(true);
+        }, 5000); // 5000 ms = 5 segundos
+
+        // Limpiar el timer si el componente se desmonta antes de los 5 segundos
+        return () => clearTimeout(timer);
+    }, []);
 
     const handleAccept = () => {
         setShowConsent(false);
